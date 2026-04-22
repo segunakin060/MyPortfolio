@@ -136,13 +136,14 @@
       margin-bottom: 1.5rem;
       animation: fadeUp 0.6s ease 0.1s both;
     }
-    .hero h1 .name { color: #fff; }
+    .hero h1 .name { color: #fff; padding-bottom: 0.1em; display: inline-block; }
     .hero h1 .title {
       display: block;
       background: linear-gradient(135deg, var(--accent), var(--accent3));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      padding-bottom: 0.2em;
     }
     .hero-sub {
       font-family: var(--mono);
@@ -618,7 +619,10 @@
 <!-- ENGAGEMENTS -->
 <section id="engagements">
   <div class="section-label">// Boot-to-Root Engagements</div>
-  <div class="section-title">Attack Chains</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;">
+    <div class="section-title" style="margin-bottom:0;">Attack Chains</div>
+    <a href="https://github.com/segunakin060/MyPortfolio" target="_blank" style="display:inline-block;font-family:var(--mono);font-size:0.72rem;color:var(--accent);border:1px solid rgba(0,212,160,0.4);padding:0.5rem 1rem;text-decoration:none;" onmouseover="this.style.background='rgba(0,212,160,0.1)'" onmouseout="this.style.background='transparent'">&#x25B6; View on GitHub &rarr;</a>
+  </div>
 
   <div class="boxes-grid">
 
@@ -626,7 +630,7 @@
     <div class="box-card box1">
       <div class="box-num">Target 01</div>
       <div class="box-name">7072Box0ne</div>
-      <div class="box-ip">192.168.25.129 &mdash; Docker / PHP / Apache</div>
+      <div class="box-ip">Docker / PHP / Apache</div>
       <div class="box-chain">
         <div class="chain-step"><span class="dot"></span>Blind SQL injection via sqlmap extracted MD5-hashed credentials from SQLite login form</div>
         <div class="chain-step"><span class="dot"></span>Hash cracked to 'access14' via CrackStation rainbow table lookup</div>
@@ -642,8 +646,8 @@
         <span class="cvss-badge cvss-high">SUID 7.8</span>
       </div>
       <div class="box-flags">
-        <div class="box-flag user">USER: 5038{B1UF_7b7b147059d79d16df6887ab8fdcd885}</div>
-        <div class="box-flag root">ROOT: 5038{B1RF_f9061a2d526eef28cc1b2286818f7b14}</div>
+        <div class="box-flag user">USER: 5038{B1UF_...} &mdash; Captured</div>
+        <div class="box-flag root">ROOT: 5038{B1RF_...} &mdash; Captured</div>
       </div>
     </div>
 
@@ -651,7 +655,7 @@
     <div class="box-card box2">
       <div class="box-num">Target 02</div>
       <div class="box-name">7072BoxTwo</div>
-      <div class="box-ip">192.168.25.129 &mdash; Docker / PHP / ImageMagick</div>
+      <div class="box-ip">Docker / PHP / ImageMagick</div>
       <div class="box-chain">
         <div class="chain-step"><span class="dot"></span>robots.txt disclosed .sqlite extension; public Coventry GitHub revealed real database filename</div>
         <div class="chain-step"><span class="dot"></span>SQLite database downloaded; MD5 hash cracked to 'goodforyou' via CrackStation</div>
@@ -667,8 +671,8 @@
         <span class="cvss-badge cvss-medium">Reuse 6.5</span>
       </div>
       <div class="box-flags">
-        <div class="box-flag user">USER: CUEH{P@ssW0rd_R3Use_I5_B@d}</div>
-        <div class="box-flag root">ROOT: CUEH{Tr@gic_Mag1c}</div>
+        <div class="box-flag user">USER: CUEH{P@ssW0rd_...} &mdash; Captured</div>
+        <div class="box-flag root">ROOT: CUEH{Tr@gic_...} &mdash; Captured</div>
       </div>
     </div>
 
@@ -676,7 +680,7 @@
     <div class="box-card box3">
       <div class="box-num">Target 03</div>
       <div class="box-name">7072BoxThree</div>
-      <div class="box-ip">192.168.62.128 &mdash; Docker / Roundcube / FastAPI / Gitea</div>
+      <div class="box-ip">Docker / Roundcube / FastAPI / Gitea</div>
       <div class="box-chain">
         <div class="chain-step"><span class="dot"></span>IMAP credentials disclosed on public website; webmaster address identified as social engineering target</div>
         <div class="chain-step"><span class="dot"></span>CVE-2024-42009 stored XSS in Roundcube 1.6.6 delivered via unauthenticated SMTP; 19 emails exfiltrated silently</div>
@@ -692,8 +696,8 @@
         <span class="cvss-badge cvss-medium">Disclosure 5.3</span>
       </div>
       <div class="box-flags">
-        <div class="box-flag user">USER: 5038{Xss_Email_Leakage}</div>
-        <div class="box-flag root">ROOT: 5038{Unit_Tests_C@n_Somet1mes_Be_Bad_4_You}</div>
+        <div class="box-flag user">USER: 5038{Xss_...} &mdash; Captured</div>
+        <div class="box-flag root">ROOT: 5038{Unit_Tests_...} &mdash; Captured</div>
       </div>
     </div>
 
@@ -985,7 +989,7 @@
     <div class="project-card ir">
       <div class="project-module">Incident Response &mdash; Coursework 2</div>
       <div class="project-title">Threat Monitoring &amp; Insider Threat IR Framework</div>
-      <div class="project-sub">Coventry University &mdash; Segun Akinsoyinu &middot; 16498040</div>
+      <div class="project-sub">Coventry University &mdash; Segun Akinsoyinu</div>
 
       <div class="project-highlights">
         <div class="project-point"><span class="icon">&#x25B6;</span>Designed a layered monitoring architecture across a multi-gateway enterprise network using NetFlow/sFlow collectors on routing nodes 1, 2, 6, and 7 and IPFIX monitoring at gateways 0, 3-5, and 8-13 to detect insider reconnaissance.</div>
@@ -999,6 +1003,9 @@
       <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Question 2 &mdash; Incident Response Evidence Collection (666 words)</div>
       <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Question 3 &mdash; APT Testing Methodology (328 words)</div>
 
+      <div style="margin-top:1rem;margin-bottom:1rem;">
+        <a href="https://github.com/segunakin060/Incident-Response" target="_blank" style="display:inline-block;font-family:var(--mono);font-size:0.72rem;color:var(--red);border:1px solid rgba(224,92,92,0.4);padding:0.5rem 1rem;text-decoration:none;" onmouseover="this.style.background='rgba(224,92,92,0.1)'" onmouseout="this.style.background='transparent'">&#x25B6; View on GitHub &rarr;</a>
+      </div>
       <div class="project-tags" style="margin-top:1rem;">
         <span class="project-tag">Zeek</span>
         <span class="project-tag">Suricata</span>
@@ -1020,7 +1027,7 @@
     <div class="project-card ns">
       <div class="project-module">Network Security &mdash; Coursework 1</div>
       <div class="project-title">Megadodo Publications Network Redesign</div>
-      <div class="project-sub">Coventry University &mdash; Segun Akinsoyinu &middot; 16498040</div>
+      <div class="project-sub">Coventry University &mdash; Segun Akinsoyinu</div>
 
       <div class="project-highlights">
         <div class="project-point"><span class="icon">&#x25B6;</span>Redesigned a flat Layer 2 campus network into a hierarchical IEEE 802.1Q VLAN architecture across two buildings (Alpha and Beta), eliminating broadcast flooding and segmenting 13 departments into dedicated /24 subnets.</div>
@@ -1048,6 +1055,9 @@
       <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Cisco Packet Tracer topology file (.pkt) submitted</div>
       <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Full report with budget table &mdash; 1,471 words</div>
 
+      <div style="margin-top:1rem;margin-bottom:1rem;">
+        <a href="https://github.com/segunakin060/network-security-project" target="_blank" style="display:inline-block;font-family:var(--mono);font-size:0.72rem;color:var(--accent3);border:1px solid rgba(91,141,238,0.4);padding:0.5rem 1rem;text-decoration:none;" onmouseover="this.style.background='rgba(91,141,238,0.1)'" onmouseout="this.style.background='transparent'">&#x25B6; View on GitHub &rarr;</a>
+      </div>
       <div class="project-tags" style="margin-top:1rem;">
         <span class="project-tag">IEEE 802.1Q VLANs</span>
         <span class="project-tag">Layer 3 Switching</span>
@@ -1070,7 +1080,7 @@
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a78bfa,transparent);"></div>
       <div class="project-module" style="color:#a78bfa;">7010SCN &mdash; Security of Connected Systems</div>
       <div class="project-title">Hill Valley Power Systems Ltd &mdash; IoT Security Strategy</div>
-      <div class="project-sub">CMI Units 704 &amp; 705 &mdash; Coventry University &middot; Segun Akinsoyinu &middot; 16498040</div>
+      <div class="project-sub">CMI Units 704 &amp; 705 &mdash; Coventry University &middot; Segun Akinsoyinu</div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.5rem;">
         <div>
@@ -1119,6 +1129,9 @@
         <span class="project-tag">Lewin Force Field</span>
         <span class="project-tag">CMI 704 &amp; 705</span>
       </div>
+      <div style="margin-top:1rem;">
+        <a href="https://github.com/segunakin060/iot-security-compliance" target="_blank" style="display:inline-block;font-family:var(--mono);font-size:0.72rem;color:#a78bfa;border:1px solid rgba(167,139,250,0.4);padding:0.5rem 1rem;text-decoration:none;" onmouseover="this.style.background='rgba(167,139,250,0.1)'" onmouseout="this.style.background='transparent'">&#x25B6; View on GitHub &rarr;</a>
+      </div>
     </div>
 
     <!-- DOCKER SECURITY PROJECT -->
@@ -1129,7 +1142,7 @@
         <div style="font-family:var(--mono);font-size:0.65rem;padding:0.25rem 0.75rem;background:rgba(0,212,160,0.12);border:1px solid rgba(0,212,160,0.3);color:var(--accent);">Grade: 85%</div>
       </div>
       <div class="project-title">Docker Container Security Hardening &amp; Cloud Infrastructure</div>
-      <div class="project-sub">MSc Cybersecurity &middot; Coventry University &middot; Segun Akinsoyinu &middot; 16498040</div>
+      <div class="project-sub">MSc Cybersecurity &middot; Coventry University &middot; Segun Akinsoyinu</div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem;">
         <div>
@@ -1207,6 +1220,9 @@
         <span class="project-tag">CIS Docker Benchmark</span>
         <span class="project-tag">NIST SP 800-190</span>
         <span class="project-tag">Infrastructure as Code</span>
+      </div>
+      <div style="margin-top:1rem;">
+        <a href="https://github.com/segunakin060/docker-security-project" target="_blank" style="display:inline-block;font-family:var(--mono);font-size:0.72rem;color:var(--accent);border:1px solid rgba(0,212,160,0.4);padding:0.5rem 1rem;text-decoration:none;" onmouseover="this.style.background='rgba(0,212,160,0.1)'" onmouseout="this.style.background='transparent'">&#x25B6; View on GitHub &rarr;</a>
       </div>
     </div>
 
