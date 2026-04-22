@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Segun Akinsoyinu | Penetration Testing Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080c10;
+      --surface: #0d1117;
+      --surface2: #111820;
+      --border: #1e2d3d;
+      --accent: #00d4a0;
+      --accent2: #ff6b35;
+      --accent3: #5b8dee;
+      --text: #c9d1d9;
+      --text-dim: #6e7f8e;
+      --red: #e05c5c;
+      --yellow: #f0c060;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* ── SCAN LINE ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 212, 160, 0.012) 2px,
+        rgba(0, 212, 160, 0.012) 4px
+      );
+      pointer-events: none; z-index: 998;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      padding: 1rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,12,16,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo span { color: var(--text-dim); }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      padding: 8rem 3rem 4rem;
+      overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,160,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,160,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,160,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 900px;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid rgba(0,212,160,0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero h1 .name { color: #fff; }
+    .hero h1 .title {
+      display: block;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+    .hero-flags {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: center;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+    .flag-chip {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+    .flag-chip.user { background: rgba(91,141,238,0.15); color: var(--accent3); border: 1px solid rgba(91,141,238,0.3); }
+    .flag-chip.root { background: rgba(0,212,160,0.1); color: var(--accent); border: 1px solid rgba(0,212,160,0.3); }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      justify-content: space-around;
+      margin: 0 3rem;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: var(--mono);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ── BOXES GRID ── */
+    .boxes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+
+    .box-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .box-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .box-card.box1::before { background: linear-gradient(90deg, var(--accent), transparent); }
+    .box-card.box2::before { background: linear-gradient(90deg, var(--accent3), transparent); }
+    .box-card.box3::before { background: linear-gradient(90deg, var(--accent2), transparent); }
+    .box-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .box-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .box-card.box1 .box-num { color: var(--accent); }
+    .box-card.box2 .box-num { color: var(--accent3); }
+    .box-card.box3 .box-num { color: var(--accent2); }
+
+    .box-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .box-ip {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .box-chain {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .chain-step {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .chain-step .dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px;
+    }
+    .box1 .dot { background: var(--accent); }
+    .box2 .dot { background: var(--accent3); }
+    .box3 .dot { background: var(--accent2); }
+
+    .box-flags { display: flex; flex-direction: column; gap: 0.4rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .box-flag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      padding: 0.35rem 0.6rem;
+      border-radius: 2px;
+      word-break: break-all;
+    }
+    .box-flag.user { background: rgba(91,141,238,0.1); color: var(--accent3); }
+    .box-flag.root { background: rgba(0,212,160,0.08); color: var(--accent); }
+
+    .cvss-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      margin-right: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .cvss-critical { background: rgba(224,92,92,0.2); color: var(--red); border: 1px solid rgba(224,92,92,0.3); }
+    .cvss-high { background: rgba(240,192,96,0.15); color: var(--yellow); border: 1px solid rgba(240,192,96,0.3); }
+    .cvss-medium { background: rgba(91,141,238,0.15); color: var(--accent3); border: 1px solid rgba(91,141,238,0.3); }
+
+    /* ── FINDINGS TABLE ── */
+    .findings-list { display: flex; flex-direction: column; gap: 1rem; }
+    .finding-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .finding-row:hover { border-color: var(--border); }
+    .finding-id {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      width: 50px;
+    }
+    .finding-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .finding-name small {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+    .finding-cvss {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .finding-cvss.c { color: var(--red); }
+    .finding-cvss.h { color: var(--yellow); }
+    .finding-cvss.m { color: var(--accent3); }
+
+    /* ── TOOLS GRID ── */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+    .tool-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .tool-card:hover { border-color: rgba(0,212,160,0.3); background: var(--surface2); }
+    .tool-name {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .tool-purpose {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── SKILLS SECTION ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.75rem;
+    }
+    .skill-block h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── TERMINAL BLOCK ── */
+    .terminal {
+      background: #050709;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .terminal-bar {
+      background: #0d1117;
+      padding: 0.6rem 1rem;
+      display: flex; gap: 0.4rem; align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot-r { width: 10px; height: 10px; border-radius: 50%; background: #e05c5c; }
+    .dot-y { width: 10px; height: 10px; border-radius: 50%; background: #f0c060; }
+    .dot-g { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .terminal-body {
+      padding: 1.25rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      line-height: 2;
+      color: var(--text);
+    }
+    .terminal-body .prompt { color: var(--accent); }
+    .terminal-body .cmd { color: #fff; }
+    .terminal-body .out { color: var(--text-dim); }
+    .terminal-body .success { color: var(--accent); }
+    .terminal-body .flag { color: var(--accent2); font-weight: 700; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .about-text p strong { color: #fff; }
+    .about-details { display: flex; flex-direction: column; gap: 0.75rem; }
+    .detail-row {
+      display: flex; gap: 1rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .detail-key { color: var(--text-dim); min-width: 100px; }
+    .detail-val { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+    }
+    footer span { color: var(--accent); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0 3rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor {
+      display: inline-block;
+      width: 2px; height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .finding-row { grid-template-columns: 1fr 1fr; }
+      .stats-bar { margin: 0 1.5rem; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">~/segun<span>_akinsoyinu</span> <span class="cursor"></span></div>
+  <div class="nav-links">
+    <a href="#engagements">Engagements</a>
+    <a href="#findings">Findings</a>
+    <a href="#tools">Tools</a>
+    <a href="#skills">Skills</a>
+    <a href="#about">About</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">&#x25B6; 7072SCN Ethical Hacking &amp; Penetration Testing</div>
+    <h1>
+      <span class="name">Segun Akinsoyinu</span>
+      <span class="title">Penetration Testing Portfolio</span>
+    </h1>
+    <p class="hero-sub">
+      Three boot-to-root environments. Six flags captured.<br/>
+      Full compromise chains from unauthenticated access to root shell.
+    </p>
+    <div class="hero-flags">
+      <span class="flag-chip user">&#x1F6A9; User: 5038{B1UF_...}</span>
+      <span class="flag-chip root">&#x1F480; Root: 5038{B1RF_...}</span>
+      <span class="flag-chip user">&#x1F6A9; User: CUEH{P@ssW0rd_...}</span>
+      <span class="flag-chip root">&#x1F480; Root: CUEH{Tr@gic_...}</span>
+      <span class="flag-chip user">&#x1F6A9; User: 5038{Xss_...}</span>
+      <span class="flag-chip root">&#x1F480; Root: 5038{Unit_Tests_...}</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Targets Compromised</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Flags Captured</div></div>
+  <div class="stat"><div class="stat-num">16</div><div class="stat-label">Vulnerabilities Found</div></div>
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">CVEs Exploited</div></div>
+  <div class="stat"><div class="stat-num">9.8</div><div class="stat-label">Highest CVSS Score</div></div>
+  <div class="stat"><div class="stat-num">PTES</div><div class="stat-label">Methodology</div></div>
+</div>
+
+<!-- ENGAGEMENTS -->
+<section id="engagements">
+  <div class="section-label">// Boot-to-Root Engagements</div>
+  <div class="section-title">Attack Chains</div>
+
+  <div class="boxes-grid">
+
+    <!-- BOX 1 -->
+    <div class="box-card box1">
+      <div class="box-num">Target 01</div>
+      <div class="box-name">7072Box0ne</div>
+      <div class="box-ip">192.168.25.129 &mdash; Docker / PHP / Apache</div>
+      <div class="box-chain">
+        <div class="chain-step"><span class="dot"></span>Blind SQL injection via sqlmap extracted MD5-hashed credentials from SQLite login form</div>
+        <div class="chain-step"><span class="dot"></span>Hash cracked to 'access14' via CrackStation rainbow table lookup</div>
+        <div class="chain-step"><span class="dot"></span>GIF89a magic-byte webshell bypassed MIME validation; Burp Suite intercepted Content-Type header</div>
+        <div class="chain-step"><span class="dot"></span>Reverse shell returned as www-data via netcat listener</div>
+        <div class="chain-step"><span class="dot"></span>SUID tee binary injected attacker SSH key to dev's authorized_keys</div>
+        <div class="chain-step"><span class="dot"></span>GTFOBins sudo ftp !/bin/bash escape escalated to root</div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <span class="cvss-badge cvss-critical">SQLi 9.8</span>
+        <span class="cvss-badge cvss-critical">RCE 9.0</span>
+        <span class="cvss-badge cvss-high">sudo 8.8</span>
+        <span class="cvss-badge cvss-high">SUID 7.8</span>
+      </div>
+      <div class="box-flags">
+        <div class="box-flag user">USER: 5038{B1UF_7b7b147059d79d16df6887ab8fdcd885}</div>
+        <div class="box-flag root">ROOT: 5038{B1RF_f9061a2d526eef28cc1b2286818f7b14}</div>
+      </div>
+    </div>
+
+    <!-- BOX 2 -->
+    <div class="box-card box2">
+      <div class="box-num">Target 02</div>
+      <div class="box-name">7072BoxTwo</div>
+      <div class="box-ip">192.168.25.129 &mdash; Docker / PHP / ImageMagick</div>
+      <div class="box-chain">
+        <div class="chain-step"><span class="dot"></span>robots.txt disclosed .sqlite extension; public Coventry GitHub revealed real database filename</div>
+        <div class="chain-step"><span class="dot"></span>SQLite database downloaded; MD5 hash cracked to 'goodforyou' via CrackStation</div>
+        <div class="chain-step"><span class="dot"></span>UNION-based SQL injection bypassed login authentication entirely</div>
+        <div class="chain-step"><span class="dot"></span>Password reused across web app and SSH port 22 yielding user flag</div>
+        <div class="chain-step"><span class="dot"></span>GitHub source review exposed profile.php running sudo convert as root</div>
+        <div class="chain-step"><span class="dot"></span>CVE-2016-3714 MVG pipe injection payload bypassed extension-only file validation; root command executed via ImageMagick</div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <span class="cvss-badge cvss-critical">SQLi 9.8</span>
+        <span class="cvss-badge cvss-high">CVE-2016-3714 8.4</span>
+        <span class="cvss-badge cvss-high">Upload 8.8</span>
+        <span class="cvss-badge cvss-medium">Reuse 6.5</span>
+      </div>
+      <div class="box-flags">
+        <div class="box-flag user">USER: CUEH{P@ssW0rd_R3Use_I5_B@d}</div>
+        <div class="box-flag root">ROOT: CUEH{Tr@gic_Mag1c}</div>
+      </div>
+    </div>
+
+    <!-- BOX 3 -->
+    <div class="box-card box3">
+      <div class="box-num">Target 03</div>
+      <div class="box-name">7072BoxThree</div>
+      <div class="box-ip">192.168.62.128 &mdash; Docker / Roundcube / FastAPI / Gitea</div>
+      <div class="box-chain">
+        <div class="chain-step"><span class="dot"></span>IMAP credentials disclosed on public website; webmaster address identified as social engineering target</div>
+        <div class="chain-step"><span class="dot"></span>CVE-2024-42009 stored XSS in Roundcube 1.6.6 delivered via unauthenticated SMTP; 19 emails exfiltrated silently</div>
+        <div class="chain-step"><span class="dot"></span>SSH credentials recovered from stolen admin email; user flag captured</div>
+        <div class="chain-step"><span class="dot"></span>CI pipeline source reviewed; malicious conftest.py placed in world-writable /tmp escalated to admin via pytest discovery</div>
+        <div class="chain-step"><span class="dot"></span>Attacker SSH key injected into admin authorized_keys via CI re-trigger</div>
+        <div class="chain-step"><span class="dot"></span>sudo git commit core.editor misconfiguration exploited via GTFOBins; root SUID bash created</div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <span class="cvss-badge cvss-high">CVE-2024-42009 8.8</span>
+        <span class="cvss-badge cvss-high">CI RCE 8.1</span>
+        <span class="cvss-badge cvss-high">sudo 7.8</span>
+        <span class="cvss-badge cvss-medium">Disclosure 5.3</span>
+      </div>
+      <div class="box-flags">
+        <div class="box-flag user">USER: 5038{Xss_Email_Leakage}</div>
+        <div class="box-flag root">ROOT: 5038{Unit_Tests_C@n_Somet1mes_Be_Bad_4_You}</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TERMINAL DEMO -->
+<section>
+  <div class="section-label">// Proof of Concept</div>
+  <div class="section-title">Sample Exploit Trace</div>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
+    </div>
+    <div class="terminal-body">
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">nmap -sC -sV -p- -T4 192.168.62.128 -oN box3_nmap.txt</span></div>
+      <div class="out">PORT      STATE SERVICE VERSION</div>
+      <div class="out">25/tcp    open  smtp    Postfix smtpd</div>
+      <div class="out">80/tcp    open  http    Apache 2.4.65</div>
+      <div class="out">1222/tcp  open  ssh     OpenSSH 10.0p2 Debian</div>
+      <div class="out">8000/tcp  open  http    Uvicorn (FastAPI)</div>
+      <div>&nbsp;</div>
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">python3 deliver_xss.py</span></div>
+      <div class="out">[*] Sending CVE-2024-42009 payload to webmaster@hacking.local ...</div>
+      <div class="success">[+] Email delivered via unauthenticated SMTP port 25</div>
+      <div class="success">[+] OPTIONS preflight received -- XSS handler fired</div>
+      <div class="success">[+] POST received -- 19 emails exfiltrated (238 KB)</div>
+      <div>&nbsp;</div>
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">ssh webmaster@192.168.62.128 -p 1222</span></div>
+      <div class="out">webmaster@7b16d12ebfcb:~$ cat user.txt</div>
+      <div class="flag">5038{Xss_Email_Leakage}</div>
+      <div>&nbsp;</div>
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">sudo /usr/bin/git commit</span></div>
+      <div class="out">[master (root-commit)] pwn</div>
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">/tmp/rootbash -p</span></div>
+      <div class="out">rootbash-5.2# whoami</div>
+      <div class="success">root</div>
+      <div class="out">rootbash-5.2# cat /root/root.txt</div>
+      <div class="flag">5038{Unit_Tests_C@n_Somet1mes_Be_Bad_4_You}</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FINDINGS -->
+<section id="findings">
+  <div class="section-label">// Vulnerability Findings</div>
+  <div class="section-title">All 16 Findings Across Three Targets</div>
+
+  <div class="findings-list">
+
+    <div class="finding-row">
+      <div class="finding-id">B1-001</div>
+      <div class="finding-name">SQL Injection &mdash; Blind SQLite Login Form<small>7072Box0ne | sqlmap boolean-based and time-based blind | OWASP A03</small></div>
+      <span class="cvss-badge cvss-critical">CRITICAL</span>
+      <div class="finding-cvss c">9.8</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B1-002</div>
+      <div class="finding-name">Insecure File Upload &mdash; MIME Bypass RCE<small>7072Box0ne | GIF89a magic bytes + Burp Content-Type intercept | OWASP A05</small></div>
+      <span class="cvss-badge cvss-critical">CRITICAL</span>
+      <div class="finding-cvss c">9.0</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B1-003</div>
+      <div class="finding-name">Sudo Misconfiguration &mdash; ftp NOPASSWD Escape<small>7072Box0ne | GTFOBins !/bin/bash shell escape | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">8.8</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B1-004</div>
+      <div class="finding-name">SUID Binary Abuse &mdash; tee owned by dev<small>7072Box0ne | SSH key injection via SUID write primitive | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">7.8</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B1-005</div>
+      <div class="finding-name">Weak Password Hashing &mdash; Unsalted MD5<small>7072Box0ne | CrackStation rainbow table lookup | OWASP A02</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">7.5</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B1-006</div>
+      <div class="finding-name">Information Disclosure &mdash; Source Code Comments<small>7072Box0ne | Plaintext password exposed in connect.php | OWASP A05</small></div>
+      <span class="cvss-badge cvss-medium">MEDIUM</span>
+      <div class="finding-cvss m">5.3</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B2-001</div>
+      <div class="finding-name">Source Code &amp; Database Exposure via Public GitHub<small>7072BoxTwo | Real SQLite DB filename disclosed in conn.php | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">7.5</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B2-002</div>
+      <div class="finding-name">SQL Injection &mdash; UNION-Based Login Bypass<small>7072BoxTwo | UNION SELECT injected matching row into auth query | OWASP A03</small></div>
+      <span class="cvss-badge cvss-critical">CRITICAL</span>
+      <div class="finding-cvss c">9.8</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B2-003</div>
+      <div class="finding-name">Remote Code Execution &mdash; CVE-2016-3714 ImageTragick<small>7072BoxTwo | MVG pipe injection; sudo convert executing as root | OWASP A06</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">8.4</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B2-004</div>
+      <div class="finding-name">File Upload &mdash; Extension-Only Validation Bypass<small>7072BoxTwo | .jpg extension accepted without magic byte validation | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">8.8</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B2-005</div>
+      <div class="finding-name">Password Reuse Across SSH and Web Application<small>7072BoxTwo | Cracked hash 'goodforyou' valid on SSH port 22 | OWASP A07</small></div>
+      <span class="cvss-badge cvss-medium">MEDIUM</span>
+      <div class="finding-cvss m">6.5</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B3-001</div>
+      <div class="finding-name">Credentials Disclosed in Public Website Content<small>7072BoxThree | IMAP/SMTP credentials on /email.html | OWASP A05</small></div>
+      <span class="cvss-badge cvss-medium">MEDIUM</span>
+      <div class="finding-cvss m">5.3</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B3-002</div>
+      <div class="finding-name">Stored XSS &mdash; CVE-2024-42009 Roundcube 1.6.6<small>7072BoxThree | CSS animation handler; full inbox silently exfiltrated | OWASP A03</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">8.8</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B3-003</div>
+      <div class="finding-name">CI Pipeline RCE &mdash; World-Writable /tmp<small>7072BoxThree | conftest.py parent-dir discovery executed as admin | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">8.1</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B3-004</div>
+      <div class="finding-name">SSH Key Injection via CI Pipeline<small>7072BoxThree | Persistent admin access via CI-executed key write | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">7.5</div>
+    </div>
+
+    <div class="finding-row">
+      <div class="finding-id">B3-005</div>
+      <div class="finding-name">Sudo git commit Privilege Escalation<small>7072BoxThree | core.editor set to root SUID bash creation command | OWASP A05</small></div>
+      <span class="cvss-badge cvss-high">HIGH</span>
+      <div class="finding-cvss h">7.8</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="section-label">// Tooling</div>
+  <div class="section-title">Tools &amp; Frameworks Applied</div>
+
+  <div class="tools-grid">
+    <div class="tool-card"><div class="tool-name">nmap 7.98</div><div class="tool-purpose">Full TCP port scanning, service version detection, NSE scripting</div></div>
+    <div class="tool-card"><div class="tool-name">ffuf v2.1.0</div><div class="tool-purpose">Web directory fuzzing and virtual host enumeration</div></div>
+    <div class="tool-card"><div class="tool-name">sqlmap 1.10.3</div><div class="tool-purpose">Automated SQL injection exploitation and database dumping</div></div>
+    <div class="tool-card"><div class="tool-name">Burp Suite 2026.2.3</div><div class="tool-purpose">HTTP proxy; MIME type bypass via request interception</div></div>
+    <div class="tool-card"><div class="tool-name">netcat / curl</div><div class="tool-purpose">Reverse shell delivery, listener, HTTP interaction, IMAP probing</div></div>
+    <div class="tool-card"><div class="tool-name">CrackStation</div><div class="tool-purpose">MD5 hash cracking via rainbow table lookup</div></div>
+    <div class="tool-card"><div class="tool-name">GTFOBins</div><div class="tool-purpose">Sudo and SUID privilege escalation reference (ftp, git commit)</div></div>
+    <div class="tool-card"><div class="tool-name">searchsploit</div><div class="tool-purpose">CVE identification against discovered service versions</div></div>
+    <div class="tool-card"><div class="tool-name">Python 3 smtplib</div><div class="tool-purpose">Authenticated SMTP delivery of XSS email payload</div></div>
+    <div class="tool-card"><div class="tool-name">Python 3 http.server</div><div class="tool-purpose">CORS-capable HTTP listener for email exfiltration receipt</div></div>
+    <div class="tool-card"><div class="tool-name">sqlite3</div><div class="tool-purpose">Local interrogation of downloaded database files</div></div>
+    <div class="tool-card"><div class="tool-name">SecLists</div><div class="tool-purpose">Wordlists for directory fuzzing and virtual host enumeration</div></div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// Demonstrated Competencies</div>
+  <div class="section-title">Technical Skill Areas</div>
+
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h3>Reconnaissance &amp; Enumeration</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Port Scanning</span>
+        <span class="skill-tag">Service Fingerprinting</span>
+        <span class="skill-tag">Virtual Host Fuzzing</span>
+        <span class="skill-tag">Web Directory Fuzzing</span>
+        <span class="skill-tag">IMAP / SMTP Interaction</span>
+        <span class="skill-tag">Source Code Review</span>
+        <span class="skill-tag">robots.txt Analysis</span>
+        <span class="skill-tag">GitHub OSINT</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Web Application Exploitation</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL Injection (Blind)</span>
+        <span class="skill-tag">SQL Injection (UNION)</span>
+        <span class="skill-tag">Stored XSS</span>
+        <span class="skill-tag">File Upload Bypass</span>
+        <span class="skill-tag">MIME Type Manipulation</span>
+        <span class="skill-tag">Magic Byte Injection</span>
+        <span class="skill-tag">Auth Bypass</span>
+        <span class="skill-tag">Session Exfiltration</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>CVE Exploitation</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">CVE-2024-42009 (Roundcube XSS)</span>
+        <span class="skill-tag">CVE-2016-3714 (ImageTragick)</span>
+        <span class="skill-tag">CVSS v3.1 Scoring</span>
+        <span class="skill-tag">searchsploit Workflow</span>
+        <span class="skill-tag">Exploit Adaptation</span>
+        <span class="skill-tag">Negative Finding Documentation</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Privilege Escalation</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Sudo Misconfiguration</span>
+        <span class="skill-tag">SUID Binary Abuse</span>
+        <span class="skill-tag">GTFOBins Techniques</span>
+        <span class="skill-tag">CI Pipeline Abuse</span>
+        <span class="skill-tag">conftest.py Injection</span>
+        <span class="skill-tag">SSH Key Injection</span>
+        <span class="skill-tag">git core.editor Escape</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Reporting &amp; Methodology</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">PTES Framework</span>
+        <span class="skill-tag">Cyber Kill Chain</span>
+        <span class="skill-tag">OWASP Top 10 2021</span>
+        <span class="skill-tag">Executive Summaries</span>
+        <span class="skill-tag">Remediation Roadmaps</span>
+        <span class="skill-tag">Threat Modelling</span>
+        <span class="skill-tag">Computer Misuse Act 1990</span>
+        <span class="skill-tag">UK GDPR Compliance</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h3>Infrastructure &amp; Tooling</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Kali Linux</span>
+        <span class="skill-tag">VMware / Docker</span>
+        <span class="skill-tag">Python Scripting</span>
+        <span class="skill-tag">Bash Automation</span>
+        <span class="skill-tag">FastAPI Analysis</span>
+        <span class="skill-tag">Gitea / Git</span>
+        <span class="skill-tag">SMTP / IMAP Protocols</span>
+        <span class="skill-tag">Reverse Shell Delivery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// About</div>
+  <div class="section-title">Background</div>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I am <strong>Segun Akinsoyinu</strong>, a cybersecurity practitioner currently pursuing an <strong>MSc in Cybersecurity at Coventry University</strong>. This portfolio documents my practical penetration testing work completed as part of the <strong>7072SCN Ethical Hacking and Penetration Testing module</strong>.
+      </p>
+      <p>
+        Across three isolated VMware lab environments, I executed complete attack chains from unauthenticated network access to full root shell, documenting every vulnerability with CVSS v3.1 scores, Cyber Kill Chain mapping, and professional-grade remediation guidance.
+      </p>
+      <p>
+        My background spans <strong>AI evaluation and content quality assessment</strong>, <strong>compliance-adjacent analysis</strong>, and customer service operations, giving me both the technical depth and the communication skills to translate complex security findings into clear, actionable language for non-technical stakeholders.
+      </p>
+    </div>
+    <div class="about-details">
+      <div class="detail-row">
+        <span class="detail-key">Institution</span>
+        <span class="detail-val">Coventry University</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Programme</span>
+        <span class="detail-val">MSc Cybersecurity</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Module</span>
+        <span class="detail-val">7072SCN Ethical Hacking</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Methodology</span>
+        <span class="detail-val">PTES + Cyber Kill Chain</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Environment</span>
+        <span class="detail-val">Isolated VMware NAT Lab</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Classification</span>
+        <span class="detail-val">Academic Use Only</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Location</span>
+        <span class="detail-val">Coventry, United Kingdom</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 <span>Segun Akinsoyinu</span>. All engagements conducted in authorised, isolated academic environments.</p>
+  <p>Built for <span>GitHub Pages</span> &mdash; 7072SCN Module Portfolio</p>
+</footer>
+
+</body>
+</html>
