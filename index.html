@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Segun Akinsoyinu | Penetration Testing Portfolio</title>
+  <title>Segun Akinsoyinu | My Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
@@ -442,6 +442,83 @@
     .detail-key { color: var(--text-dim); min-width: 100px; }
     .detail-val { color: var(--accent); }
 
+    /* ── PROJECT CARDS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .project-card.ir::before { background: linear-gradient(90deg, var(--red), transparent); }
+    .project-card.ns::before { background: linear-gradient(90deg, var(--accent3), transparent); }
+    .project-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-3px); }
+    .project-module {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .project-card.ir .project-module { color: var(--red); }
+    .project-card.ns .project-module { color: var(--accent3); }
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .project-sub {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    .project-highlights { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .project-point {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .project-point .icon {
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 2px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+    .project-tag {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+    }
+    .deliverable-row {
+      display: flex; gap: 0.5rem; align-items: center;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      padding: 0.5rem 0.75rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      margin-bottom: 0.4rem;
+    }
+    .deliverable-row .d-icon { color: var(--accent); }
+    .vlan-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-family: var(--mono); font-size: 0.68rem; }
+    .vlan-table th { color: var(--text-dim); text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--border); }
+    .vlan-table td { color: var(--text); padding: 0.35rem 0.6rem; border-bottom: 1px solid rgba(30,45,61,0.5); }
+    .vlan-table tr:hover td { background: rgba(255,255,255,0.02); }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -497,6 +574,7 @@
     <a href="#engagements">Engagements</a>
     <a href="#findings">Findings</a>
     <a href="#tools">Tools</a>
+    <a href="#projects">Projects</a>
     <a href="#skills">Skills</a>
     <a href="#about">About</a>
   </div>
@@ -507,14 +585,14 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <div class="hero-tag">&#x25B6; 7072SCN Ethical Hacking &amp; Penetration Testing</div>
+    <div class="hero-tag">&#x25B6; MSc Cybersecurity &mdash; Coventry University</div>
     <h1>
       <span class="name">Segun Akinsoyinu</span>
-      <span class="title">Penetration Testing Portfolio</span>
+      <span class="title">Cybersecurity Portfolio</span>
     </h1>
     <p class="hero-sub">
-      Three boot-to-root environments. Six flags captured.<br/>
-      Full compromise chains from unauthenticated access to root shell.
+      Penetration testing. Incident response. Network security design.<br/>
+      Three disciplines. Real lab environments. Zero generic filler.
     </p>
     <div class="hero-flags">
       <span class="flag-chip user">&#x1F6A9; User: 5038{B1UF_...}</span>
@@ -531,10 +609,10 @@
 <div class="stats-bar">
   <div class="stat"><div class="stat-num">3</div><div class="stat-label">Targets Compromised</div></div>
   <div class="stat"><div class="stat-num">6</div><div class="stat-label">Flags Captured</div></div>
-  <div class="stat"><div class="stat-num">16</div><div class="stat-label">Vulnerabilities Found</div></div>
+  <div class="stat"><div class="stat-num">16</div><div class="stat-label">Vulns Identified</div></div>
   <div class="stat"><div class="stat-num">4</div><div class="stat-label">CVEs Exploited</div></div>
-  <div class="stat"><div class="stat-num">9.8</div><div class="stat-label">Highest CVSS Score</div></div>
-  <div class="stat"><div class="stat-num">PTES</div><div class="stat-label">Methodology</div></div>
+  <div class="stat"><div class="stat-num">13</div><div class="stat-label">VLANs Designed</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Modules Covered</div></div>
 </div>
 
 <!-- ENGAGEMENTS -->
@@ -896,6 +974,247 @@
 
 <hr class="divider" />
 
+<!-- ACADEMIC PROJECTS -->
+<section id="projects">
+  <div class="section-label">// Academic Projects</div>
+  <div class="section-title">Other Coursework</div>
+
+  <div class="projects-grid">
+
+    <!-- INCIDENT RESPONSE -->
+    <div class="project-card ir">
+      <div class="project-module">Incident Response &mdash; Coursework 2</div>
+      <div class="project-title">Threat Monitoring &amp; Insider Threat IR Framework</div>
+      <div class="project-sub">Coventry University &mdash; Segun Akinsoyinu &middot; 16498040</div>
+
+      <div class="project-highlights">
+        <div class="project-point"><span class="icon">&#x25B6;</span>Designed a layered monitoring architecture across a multi-gateway enterprise network using NetFlow/sFlow collectors on routing nodes 1, 2, 6, and 7 and IPFIX monitoring at gateways 0, 3-5, and 8-13 to detect insider reconnaissance.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Deployed Zeek with custom protocol and behaviour analysis scripts alongside Suricata IDS/IPS at network chokepoints to flag Nmap scanning patterns, DNS enumeration, and service query anomalies.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Produced a forensic evidence collection plan covering memory capture (DumpIt / FTK Imager), registry hive extraction, USB device logging, full packet capture, and database transaction log analysis across affected gateways 5, 9, and 10.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Addressed forensic soundness requirements: hardware write-blockers, SHA-256 hashing, chain-of-custody documentation, and system clock synchronisation for legal admissibility.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Proposed APT testing methodology combining monthly penetration tests, red-team simulations using living-off-the-land TTPs, and purple-team sessions aligned to MITRE ATT&amp;CK.</div>
+      </div>
+
+      <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Question 1 &mdash; Detecting Insider Reconnaissance (523 words)</div>
+      <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Question 2 &mdash; Incident Response Evidence Collection (666 words)</div>
+      <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Question 3 &mdash; APT Testing Methodology (328 words)</div>
+
+      <div class="project-tags" style="margin-top:1rem;">
+        <span class="project-tag">Zeek</span>
+        <span class="project-tag">Suricata</span>
+        <span class="project-tag">NetFlow / sFlow</span>
+        <span class="project-tag">IPFIX</span>
+        <span class="project-tag">Splunk SIEM</span>
+        <span class="project-tag">MITRE ATT&amp;CK</span>
+        <span class="project-tag">FTK Imager</span>
+        <span class="project-tag">DumpIt</span>
+        <span class="project-tag">SHA-256 Hashing</span>
+        <span class="project-tag">Chain of Custody</span>
+        <span class="project-tag">Purple Team</span>
+        <span class="project-tag">APT Detection</span>
+        <span class="project-tag">OSCP / GPEN</span>
+      </div>
+    </div>
+
+    <!-- NETWORK SECURITY -->
+    <div class="project-card ns">
+      <div class="project-module">Network Security &mdash; Coursework 1</div>
+      <div class="project-title">Megadodo Publications Network Redesign</div>
+      <div class="project-sub">Coventry University &mdash; Segun Akinsoyinu &middot; 16498040</div>
+
+      <div class="project-highlights">
+        <div class="project-point"><span class="icon">&#x25B6;</span>Redesigned a flat Layer 2 campus network into a hierarchical IEEE 802.1Q VLAN architecture across two buildings (Alpha and Beta), eliminating broadcast flooding and segmenting 13 departments into dedicated /24 subnets.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Specified Layer 3 core switch deployment for hardware-accelerated inter-VLAN routing and QoS policy enforcement, prioritising VoIP and server backup traffic.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Replaced single copper inter-building link with redundant OM4 multimode fibre running as a dual-port LACP bundle (2 x 1 Gbps SFP+) for full fault tolerance.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Deployed FortiGate NGFW at the perimeter with stateful inspection, IPS, WAF, and a DMZ for the server environment. Implemented 802.1X RADIUS authentication and NAC for endpoint compliance enforcement.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Authored policy amendments covering RBAC with least privilege, MFA enforcement for management and finance, ISO/IEC 27001:2022 aligned BYOD/AUP, incident response with RTO/RPO objectives, and third-party SaaS risk assessments.</div>
+        <div class="project-point"><span class="icon">&#x25B6;</span>Delivered full budget allocation (£8,000 total) with device-level costing and a future Zero Trust roadmap using FortiGate policy enforcement.</div>
+      </div>
+
+      <div style="margin-bottom:1rem;">
+        <table class="vlan-table">
+          <thead><tr><th>Department</th><th>Subnet</th></tr></thead>
+          <tbody>
+            <tr><td>Server</td><td>10.3.70.0/24</td></tr>
+            <tr><td>Finance</td><td>10.2.30.0/24</td></tr>
+            <tr><td>IT</td><td>10.8.100.0/24</td></tr>
+            <tr><td>Software Dev</td><td>10.2.40.0/24</td></tr>
+            <tr><td>Guest Wi-Fi (Beta)</td><td>10.4.100.0/24</td></tr>
+            <tr><td>+ 8 more VLANs</td><td>&mdash;</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Cisco Packet Tracer topology file (.pkt) submitted</div>
+      <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Full report with budget table &mdash; 1,471 words</div>
+
+      <div class="project-tags" style="margin-top:1rem;">
+        <span class="project-tag">IEEE 802.1Q VLANs</span>
+        <span class="project-tag">Layer 3 Switching</span>
+        <span class="project-tag">LACP / SFP+</span>
+        <span class="project-tag">FortiGate NGFW</span>
+        <span class="project-tag">802.1X / RADIUS</span>
+        <span class="project-tag">NAC</span>
+        <span class="project-tag">Splunk SIEM</span>
+        <span class="project-tag">QoS</span>
+        <span class="project-tag">Wi-Fi 6</span>
+        <span class="project-tag">OM4 Fibre</span>
+        <span class="project-tag">ISO/IEC 27001:2022</span>
+        <span class="project-tag">Zero Trust</span>
+        <span class="project-tag">Cisco Packet Tracer</span>
+      </div>
+    </div>
+
+    <!-- HVPS SECURITY STRATEGY -->
+    <div class="project-card" style="grid-column: 1 / -1; border: 1px solid #3d2f6e; background: linear-gradient(135deg, rgba(167,139,250,0.05) 0%, var(--surface) 60%);">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a78bfa,transparent);"></div>
+      <div class="project-module" style="color:#a78bfa;">7010SCN &mdash; Security of Connected Systems</div>
+      <div class="project-title">Hill Valley Power Systems Ltd &mdash; IoT Security Strategy</div>
+      <div class="project-sub">CMI Units 704 &amp; 705 &mdash; Coventry University &middot; Segun Akinsoyinu &middot; 16498040</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:1.5rem;">
+        <div>
+          <div class="project-highlights">
+            <div class="project-point"><span class="icon">&#x25B6;</span>Conducted full strategic analysis of a 47-person IoT energy management company using PESTLE, Porter's Five Forces, VRIO, McKinsey 7S, and Balanced Scorecard, identifying security as an active commercial weakness blocking ISO 27001 investor requirements and German BSI market entry.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Evaluated three strategic options against SAFe criteria and selected a phased 18-month programme: Cyber Essentials Plus by month 6, ISO 27001 or SOC 2 by month 18, and BSI TR-03148 certification for German market entry by month 24.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Recommended Microsoft SDL with STRIDE threat modelling embedded into two-week agile sprints, justified against OWASP SAMM and PASTA. Designed a Security Champions programme scaling security capacity with headcount growth rather than requiring dedicated security hires.</div>
+          </div>
+        </div>
+        <div>
+          <div class="project-highlights">
+            <div class="project-point"><span class="icon">&#x25B6;</span>Designed PTES methodology augmented with IoT-specific tooling (Binwalk, EMBA, UART/JTAG, Zigbee, MQTT) for the Flux-88, Flux-121, Flux-Sense device range and Flux Capacitor REST API. Modelled distributed architecture implications for a 10,900-installation installed base.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Produced a case study on Johnson Controls Metasys CVE-2025-26385 (CVSS 10.0, command injection) and CVE-2021-36204 (CVSS 7.8, plaintext credential exposure via API), mapping both failure patterns directly to HVPS's Flux Capacitor platform as equivalent unmitigated risks.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Applied Kotter's 8-step model, ADKAR individual adoption, Lewin's Force Field Analysis, and Balogun and Hope Hailey's Reconstruction typology to manage developer resistance and embed security-as-literacy across the engineering team.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.4rem;margin-bottom:1.25rem;">
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Section 2 &mdash; Org Change Strategy (PESTLE, 7S, SAFe)</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Section 3 &mdash; Secure Design: SDL + STRIDE vs SAMM vs PASTA</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Section 4 &mdash; Audit: PTES + IoT vs OWASP vs NIST 800-115</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Section 5 &mdash; Case Study: CVE-2025-26385 &amp; CVE-2021-36204</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Appendix A &mdash; Full 7S, VRIO, Kotter, ADKAR, Lewin tables</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Appendix B &mdash; STRIDE model, PTES IoT scope, checklist, compliance map</div>
+      </div>
+
+      <div class="project-tags">
+        <span class="project-tag">Microsoft SDL</span>
+        <span class="project-tag">STRIDE</span>
+        <span class="project-tag">PTES + IoT</span>
+        <span class="project-tag">OWASP IoT</span>
+        <span class="project-tag">ETSI TS 103 701</span>
+        <span class="project-tag">ISO 27001</span>
+        <span class="project-tag">SOC 2</span>
+        <span class="project-tag">BSI TR-03148</span>
+        <span class="project-tag">Cyber Essentials Plus</span>
+        <span class="project-tag">PSTI Act 2022</span>
+        <span class="project-tag">EU Cyber Resilience Act</span>
+        <span class="project-tag">CVE-2025-26385 CVSS 10.0</span>
+        <span class="project-tag">Binwalk / EMBA</span>
+        <span class="project-tag">MQTT / Zigbee</span>
+        <span class="project-tag">McKinsey 7S</span>
+        <span class="project-tag">Balanced Scorecard</span>
+        <span class="project-tag">Kotter / ADKAR</span>
+        <span class="project-tag">Lewin Force Field</span>
+        <span class="project-tag">CMI 704 &amp; 705</span>
+      </div>
+    </div>
+
+    <!-- DOCKER SECURITY PROJECT -->
+    <div class="project-card" style="grid-column: 1 / -1; border: 1px solid #1e3a2f; background: linear-gradient(135deg, rgba(0,212,160,0.04) 0%, var(--surface) 60%);">
+      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00d4a0,transparent);"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.4rem;">
+        <div class="project-module" style="color:var(--accent);margin-bottom:0;">7009SCN &mdash; Cloud Infrastructure and Operations</div>
+        <div style="font-family:var(--mono);font-size:0.65rem;padding:0.25rem 0.75rem;background:rgba(0,212,160,0.12);border:1px solid rgba(0,212,160,0.3);color:var(--accent);">Grade: 85%</div>
+      </div>
+      <div class="project-title">Docker Container Security Hardening &amp; Cloud Infrastructure</div>
+      <div class="project-sub">MSc Cybersecurity &middot; Coventry University &middot; Segun Akinsoyinu &middot; 16498040</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;margin-bottom:1.5rem;">
+        <div>
+          <div style="font-family:var(--mono);font-size:0.63rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Part A &mdash; Security Analysis</div>
+          <div class="project-highlights">
+            <div class="project-point"><span class="icon">&#x25B6;</span>Identified six critical vulnerabilities in a prototype Docker environment: EOL CentOS 7 base images, privileged execution, root UID processes, excessive port exposure (SSH 22 + daemon 2375), hard-coded credentials in Makefiles, and zero resource limits.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Hardened web container: migrated from CentOS 7 (~600MB) to Alpine Linux 3.19 (~50MB), 92% image size reduction via multi-stage build, non-root webuser (UID 1001), read-only root filesystem with tmpfs mounts.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Applied runtime controls: no-new-privileges, AppArmor custom profile, custom seccomp policy, ALL capabilities dropped with selective NET_BIND_SERVICE re-add, CPU and memory limits enforced.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:0.63rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Part B &mdash; Implementation</div>
+          <div class="project-highlights">
+            <div class="project-point"><span class="icon">&#x25B6;</span>Migrated Makefile-driven workflow to declarative Docker Compose Infrastructure as Code with auditable controls, health-check-driven dependency management, and network segmentation isolating front-end and back-end traffic.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Integrated Trivy and Snyk into a four-stage scanning pipeline: pre-commit local scans, build-time automated scans with pipeline failure on HIGH/CRITICAL findings, Dockerfile config scans, and runtime registry re-scans on CVE database updates.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Designed multi-layer logging: Nginx access/error, PHP error, Docker JSON driver, daemon events, and security audit logs. ELK Stack (Elasticsearch, Logstash, Kibana) with Prometheus and Grafana for metrics, OOM events, seccomp violations, and SIEM integration path.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:0.63rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem;">Part C &mdash; AWS EKS Cloud Strategy</div>
+          <div class="project-highlights">
+            <div class="project-point"><span class="icon">&#x25B6;</span>Evaluated IaaS, PaaS, and CaaS deployment models; selected AWS EKS for managed Kubernetes control plane, IRSA, CloudWatch/ECR/KMS/VPC integration, and native HPA and Cluster Autoscaler support.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Designed multi-AZ high-availability architecture across three us-west-2 availability zones: worker nodes in private subnets, ALB in public subnets, pod anti-affinity rules, RDS MariaDB Multi-AZ with ~60-second automatic failover, and Kubernetes network policies enforcing zero-trust inter-service communication.</div>
+            <div class="project-point"><span class="icon">&#x25B6;</span>Designed CI/CD pipeline: Code Commit, multi-stage build, Trivy scan gate, Syft SBOM generation, Cosign image signing, OPA/Conftest manifest validation, ECR push, EKS rollout. Estimated baseline cost £270-£315/month with 40-60% saving via Reserved Instances.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics table -->
+      <div style="margin-bottom:1.25rem;overflow-x:auto;">
+        <table class="vlan-table" style="min-width:600px;">
+          <thead><tr><th>Security Metric</th><th>Before</th><th>After</th></tr></thead>
+          <tbody>
+            <tr><td>Base Image Size</td><td style="color:var(--red);">~600MB (CentOS 7 EOL)</td><td style="color:var(--accent);">~50MB (Alpine 3.19)</td></tr>
+            <tr><td>User Execution Context</td><td style="color:var(--red);">Root (UID 0)</td><td style="color:var(--accent);">Non-root dedicated users</td></tr>
+            <tr><td>Container Privileges</td><td style="color:var(--red);">--privileged=true</td><td style="color:var(--accent);">ALL capabilities dropped</td></tr>
+            <tr><td>Credential Handling</td><td style="color:var(--red);">Hard-coded in Makefiles</td><td style="color:var(--accent);">Docker secrets (file-based)</td></tr>
+            <tr><td>Root Filesystem</td><td style="color:var(--red);">Fully writable</td><td style="color:var(--accent);">Read-only + tmpfs</td></tr>
+            <tr><td>Vulnerability Status</td><td style="color:var(--red);">Multiple HIGH/CRITICAL CVEs</td><td style="color:var(--accent);">Zero known critical vulns</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0.4rem;margin-bottom:1.25rem;">
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>SECURITY_ANALYSIS_REPORT.md &mdash; 2,500+ word threat analysis</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>SECURITY_IMPLEMENTATION_GUIDE.md &mdash; Full hardening walkthrough</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>docker-compose.hardened.yml &mdash; IaC orchestration file</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>manage-secure.sh &mdash; Automated security management script</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>Hardened Dockerfiles: webserver (Nginx/PHP-FPM) + dbserver (MariaDB)</div>
+        <div class="deliverable-row"><span class="d-icon">&#x25A0;</span>README-CLOUD-DEPLOYMENT.md &mdash; AWS EKS production strategy</div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;border-top:1px solid var(--border);padding-top:1rem;">
+        <span class="project-tag">Docker</span>
+        <span class="project-tag">Docker Compose</span>
+        <span class="project-tag">Alpine Linux</span>
+        <span class="project-tag">Nginx / PHP-FPM</span>
+        <span class="project-tag">MariaDB</span>
+        <span class="project-tag">Trivy</span>
+        <span class="project-tag">Snyk</span>
+        <span class="project-tag">AppArmor</span>
+        <span class="project-tag">Seccomp</span>
+        <span class="project-tag">Docker Secrets</span>
+        <span class="project-tag">AWS EKS</span>
+        <span class="project-tag">AWS RDS</span>
+        <span class="project-tag">AWS ECR</span>
+        <span class="project-tag">Kubernetes</span>
+        <span class="project-tag">GitHub Actions</span>
+        <span class="project-tag">Prometheus</span>
+        <span class="project-tag">Grafana</span>
+        <span class="project-tag">ELK Stack</span>
+        <span class="project-tag">Cosign</span>
+        <span class="project-tag">Syft SBOM</span>
+        <span class="project-tag">OPA / Conftest</span>
+        <span class="project-tag">CIS Docker Benchmark</span>
+        <span class="project-tag">NIST SP 800-190</span>
+        <span class="project-tag">Infrastructure as Code</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">// About</div>
@@ -904,13 +1223,13 @@
   <div class="about-grid">
     <div class="about-text">
       <p>
-        I am <strong>Segun Akinsoyinu</strong>, a cybersecurity practitioner currently pursuing an <strong>MSc in Cybersecurity at Coventry University</strong>. This portfolio documents my practical penetration testing work completed as part of the <strong>7072SCN Ethical Hacking and Penetration Testing module</strong>.
+        I am <strong>Segun Akinsoyinu</strong>, a cybersecurity practitioner pursuing an <strong>MSc in Cybersecurity at Coventry University</strong>. This portfolio covers practical work across five modules: ethical hacking and penetration testing, incident response, network security design, security of connected systems, and cloud infrastructure security.
       </p>
       <p>
-        Across three isolated VMware lab environments, I executed complete attack chains from unauthenticated network access to full root shell, documenting every vulnerability with CVSS v3.1 scores, Cyber Kill Chain mapping, and professional-grade remediation guidance.
+        Across three isolated VMware lab environments I executed complete attack chains from unauthenticated access to root shell. In parallel coursework I designed enterprise monitoring frameworks for insider threat detection, architected a full campus network redesign, produced a board-level IoT security strategy applying CMI Units 704 and 705 frameworks, and delivered a full Docker hardening and AWS EKS cloud deployment project graded at 85%.
       </p>
       <p>
-        My background spans <strong>AI evaluation and content quality assessment</strong>, <strong>compliance-adjacent analysis</strong>, and customer service operations, giving me both the technical depth and the communication skills to translate complex security findings into clear, actionable language for non-technical stakeholders.
+        My background also spans <strong>AI evaluation and content quality assessment</strong> and <strong>compliance-adjacent analysis</strong>, giving me the communication skills to translate complex technical findings into clear, actionable language for non-technical stakeholders.
       </p>
     </div>
     <div class="about-details">
@@ -923,20 +1242,28 @@
         <span class="detail-val">MSc Cybersecurity</span>
       </div>
       <div class="detail-row">
-        <span class="detail-key">Module</span>
+        <span class="detail-key">Module 1</span>
         <span class="detail-val">7072SCN Ethical Hacking</span>
       </div>
       <div class="detail-row">
+        <span class="detail-key">Module 2</span>
+        <span class="detail-val">Incident Response CW2</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Module 3</span>
+        <span class="detail-val">Network Security CW1</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Module 4</span>
+        <span class="detail-val">7010SCN Connected Systems</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">Module 5</span>
+        <span class="detail-val">7009SCN Cloud Infra (85%)</span>
+      </div>
+      <div class="detail-row">
         <span class="detail-key">Methodology</span>
-        <span class="detail-val">PTES + Cyber Kill Chain</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-key">Environment</span>
-        <span class="detail-val">Isolated VMware NAT Lab</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-key">Classification</span>
-        <span class="detail-val">Academic Use Only</span>
+        <span class="detail-val">PTES + Kill Chain + MITRE</span>
       </div>
       <div class="detail-row">
         <span class="detail-key">Location</span>
@@ -948,8 +1275,8 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 <span>Segun Akinsoyinu</span>. All engagements conducted in authorised, isolated academic environments.</p>
-  <p>Built for <span>GitHub Pages</span> &mdash; 7072SCN Module Portfolio</p>
+  <p>&copy; 2026 <span>Segun Akinsoyinu</span>. All work conducted in authorised academic environments.</p>
+  <p>Built for <span>GitHub Pages</span> &mdash; MSc Cybersecurity Portfolio</p>
 </footer>
 
 </body>
