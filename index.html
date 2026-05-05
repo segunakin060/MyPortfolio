@@ -629,7 +629,7 @@
     <!-- BOX 1 -->
     <div class="box-card box1">
       <div class="box-num">Target 01</div>
-      <div class="box-name">7072Box0ne</div>
+      <div class="box-name">Target 01</div>
       <div class="box-ip">Docker / PHP / Apache</div>
       <div class="box-chain">
         <div class="chain-step"><span class="dot"></span>Blind SQL injection via sqlmap extracted MD5-hashed credentials from SQLite login form</div>
@@ -654,7 +654,7 @@
     <!-- BOX 2 -->
     <div class="box-card box2">
       <div class="box-num">Target 02</div>
-      <div class="box-name">7072BoxTwo</div>
+      <div class="box-name">Target 02</div>
       <div class="box-ip">Docker / PHP / ImageMagick</div>
       <div class="box-chain">
         <div class="chain-step"><span class="dot"></span>robots.txt disclosed .sqlite extension; public Coventry GitHub revealed real database filename</div>
@@ -679,7 +679,7 @@
     <!-- BOX 3 -->
     <div class="box-card box3">
       <div class="box-num">Target 03</div>
-      <div class="box-name">7072BoxThree</div>
+      <div class="box-name">Target 03</div>
       <div class="box-ip">Docker / Roundcube / FastAPI / Gitea</div>
       <div class="box-chain">
         <div class="chain-step"><span class="dot"></span>IMAP credentials disclosed on public website; webmaster address identified as social engineering target</div>
@@ -754,112 +754,112 @@
 
     <div class="finding-row">
       <div class="finding-id">B1-001</div>
-      <div class="finding-name">SQL Injection &mdash; Blind SQLite Login Form<small>7072Box0ne | sqlmap boolean-based and time-based blind | OWASP A03</small></div>
+      <div class="finding-name">SQL Injection &mdash; Blind SQLite Login Form<small>Target 01 | sqlmap boolean-based and time-based blind | OWASP A03</small></div>
       <span class="cvss-badge cvss-critical">CRITICAL</span>
       <div class="finding-cvss c">9.8</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B1-002</div>
-      <div class="finding-name">Insecure File Upload &mdash; MIME Bypass RCE<small>7072Box0ne | GIF89a magic bytes + Burp Content-Type intercept | OWASP A05</small></div>
+      <div class="finding-name">Insecure File Upload &mdash; MIME Bypass RCE<small>Target 01 | GIF89a magic bytes + Burp Content-Type intercept | OWASP A05</small></div>
       <span class="cvss-badge cvss-critical">CRITICAL</span>
       <div class="finding-cvss c">9.0</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B1-003</div>
-      <div class="finding-name">Sudo Misconfiguration &mdash; ftp NOPASSWD Escape<small>7072Box0ne | GTFOBins !/bin/bash shell escape | OWASP A05</small></div>
+      <div class="finding-name">Sudo Misconfiguration &mdash; ftp NOPASSWD Escape<small>Target 01 | GTFOBins !/bin/bash shell escape | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">8.8</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B1-004</div>
-      <div class="finding-name">SUID Binary Abuse &mdash; tee owned by dev<small>7072Box0ne | SSH key injection via SUID write primitive | OWASP A05</small></div>
+      <div class="finding-name">SUID Binary Abuse &mdash; tee owned by dev<small>Target 01 | SSH key injection via SUID write primitive | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">7.8</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B1-005</div>
-      <div class="finding-name">Weak Password Hashing &mdash; Unsalted MD5<small>7072Box0ne | CrackStation rainbow table lookup | OWASP A02</small></div>
+      <div class="finding-name">Weak Password Hashing &mdash; Unsalted MD5<small>Target 01 | CrackStation rainbow table lookup | OWASP A02</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">7.5</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B1-006</div>
-      <div class="finding-name">Information Disclosure &mdash; Source Code Comments<small>7072Box0ne | Plaintext password exposed in connect.php | OWASP A05</small></div>
+      <div class="finding-name">Information Disclosure &mdash; Source Code Comments<small>Target 01 | Plaintext password exposed in connect.php | OWASP A05</small></div>
       <span class="cvss-badge cvss-medium">MEDIUM</span>
       <div class="finding-cvss m">5.3</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B2-001</div>
-      <div class="finding-name">Source Code &amp; Database Exposure via Public GitHub<small>7072BoxTwo | Real SQLite DB filename disclosed in conn.php | OWASP A05</small></div>
+      <div class="finding-name">Source Code &amp; Database Exposure via Public GitHub<small>Target 02 | Real SQLite DB filename disclosed in conn.php | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">7.5</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B2-002</div>
-      <div class="finding-name">SQL Injection &mdash; UNION-Based Login Bypass<small>7072BoxTwo | UNION SELECT injected matching row into auth query | OWASP A03</small></div>
+      <div class="finding-name">SQL Injection &mdash; UNION-Based Login Bypass<small>Target 02 | UNION SELECT injected matching row into auth query | OWASP A03</small></div>
       <span class="cvss-badge cvss-critical">CRITICAL</span>
       <div class="finding-cvss c">9.8</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B2-003</div>
-      <div class="finding-name">Remote Code Execution &mdash; CVE-2016-3714 ImageTragick<small>7072BoxTwo | MVG pipe injection; sudo convert executing as root | OWASP A06</small></div>
+      <div class="finding-name">Remote Code Execution &mdash; CVE-2016-3714 ImageTragick<small>Target 02 | MVG pipe injection; sudo convert executing as root | OWASP A06</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">8.4</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B2-004</div>
-      <div class="finding-name">File Upload &mdash; Extension-Only Validation Bypass<small>7072BoxTwo | .jpg extension accepted without magic byte validation | OWASP A05</small></div>
+      <div class="finding-name">File Upload &mdash; Extension-Only Validation Bypass<small>Target 02 | .jpg extension accepted without magic byte validation | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">8.8</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B2-005</div>
-      <div class="finding-name">Password Reuse Across SSH and Web Application<small>7072BoxTwo | Cracked hash 'goodforyou' valid on SSH port 22 | OWASP A07</small></div>
+      <div class="finding-name">Password Reuse Across SSH and Web Application<small>Target 02 | Cracked hash 'goodforyou' valid on SSH port 22 | OWASP A07</small></div>
       <span class="cvss-badge cvss-medium">MEDIUM</span>
       <div class="finding-cvss m">6.5</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B3-001</div>
-      <div class="finding-name">Credentials Disclosed in Public Website Content<small>7072BoxThree | IMAP/SMTP credentials on /email.html | OWASP A05</small></div>
+      <div class="finding-name">Credentials Disclosed in Public Website Content<small>Target 03 | IMAP/SMTP credentials on /email.html | OWASP A05</small></div>
       <span class="cvss-badge cvss-medium">MEDIUM</span>
       <div class="finding-cvss m">5.3</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B3-002</div>
-      <div class="finding-name">Stored XSS &mdash; CVE-2024-42009 Roundcube 1.6.6<small>7072BoxThree | CSS animation handler; full inbox silently exfiltrated | OWASP A03</small></div>
+      <div class="finding-name">Stored XSS &mdash; CVE-2024-42009 Roundcube 1.6.6<small>Target 03 | CSS animation handler; full inbox silently exfiltrated | OWASP A03</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">8.8</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B3-003</div>
-      <div class="finding-name">CI Pipeline RCE &mdash; World-Writable /tmp<small>7072BoxThree | conftest.py parent-dir discovery executed as admin | OWASP A05</small></div>
+      <div class="finding-name">CI Pipeline RCE &mdash; World-Writable /tmp<small>Target 03 | conftest.py parent-dir discovery executed as admin | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">8.1</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B3-004</div>
-      <div class="finding-name">SSH Key Injection via CI Pipeline<small>7072BoxThree | Persistent admin access via CI-executed key write | OWASP A05</small></div>
+      <div class="finding-name">SSH Key Injection via CI Pipeline<small>Target 03 | Persistent admin access via CI-executed key write | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">7.5</div>
     </div>
 
     <div class="finding-row">
       <div class="finding-id">B3-005</div>
-      <div class="finding-name">Sudo git commit Privilege Escalation<small>7072BoxThree | core.editor set to root SUID bash creation command | OWASP A05</small></div>
+      <div class="finding-name">Sudo git commit Privilege Escalation<small>Target 03 | core.editor set to root SUID bash creation command | OWASP A05</small></div>
       <span class="cvss-badge cvss-high">HIGH</span>
       <div class="finding-cvss h">7.8</div>
     </div>
@@ -1078,7 +1078,7 @@
     <!-- HVPS SECURITY STRATEGY -->
     <div class="project-card" style="grid-column: 1 / -1; border: 1px solid #3d2f6e; background: linear-gradient(135deg, rgba(167,139,250,0.05) 0%, var(--surface) 60%);">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#a78bfa,transparent);"></div>
-      <div class="project-module" style="color:#a78bfa;">7010SCN &mdash; Security of Connected Systems</div>
+      <div class="project-module" style="color:#a78bfa;">Security of Connected Systems</div>
       <div class="project-title">Hill Valley Power Systems Ltd &mdash; IoT Security Strategy</div>
       <div class="project-sub">CMI Units 704 &amp; 705 &mdash; Coventry University &middot; Segun Akinsoyinu</div>
 
@@ -1138,7 +1138,7 @@
     <div class="project-card" style="grid-column: 1 / -1; border: 1px solid #1e3a2f; background: linear-gradient(135deg, rgba(0,212,160,0.04) 0%, var(--surface) 60%);">
       <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00d4a0,transparent);"></div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.4rem;">
-        <div class="project-module" style="color:var(--accent);margin-bottom:0;">7009SCN &mdash; Cloud Infrastructure and Operations</div>
+        <div class="project-module" style="color:var(--accent);margin-bottom:0;">Cloud Infrastructure and Operations</div>
         <div style="font-family:var(--mono);font-size:0.65rem;padding:0.25rem 0.75rem;background:rgba(0,212,160,0.12);border:1px solid rgba(0,212,160,0.3);color:var(--accent);">Grade: 85%</div>
       </div>
       <div class="project-title">Docker Container Security Hardening &amp; Cloud Infrastructure</div>
@@ -1259,7 +1259,7 @@
       </div>
       <div class="detail-row">
         <span class="detail-key">Module 1</span>
-        <span class="detail-val">7072SCN Ethical Hacking</span>
+        <span class="detail-val">Ethical Hacking</span>
       </div>
       <div class="detail-row">
         <span class="detail-key">Module 2</span>
@@ -1271,11 +1271,11 @@
       </div>
       <div class="detail-row">
         <span class="detail-key">Module 4</span>
-        <span class="detail-val">7010SCN Connected Systems</span>
+        <span class="detail-val">Connected Systems</span>
       </div>
       <div class="detail-row">
         <span class="detail-key">Module 5</span>
-        <span class="detail-val">7009SCN Cloud Infra (85%)</span>
+        <span class="detail-val">Cloud Infrastructure (85%)</span>
       </div>
       <div class="detail-row">
         <span class="detail-key">Methodology</span>
