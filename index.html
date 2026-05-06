@@ -91,7 +91,12 @@
       display: flex; align-items: center; justify-content: center;
       position: relative;
       padding: 8rem 3rem 4rem;
+      overflow: visible;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
       overflow: hidden;
+      pointer-events: none;
     }
     .hero-grid {
       position: absolute; inset: 0;
@@ -586,8 +591,10 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+  </div>
   <div class="hero-inner">
     <div class="hero-tag">&#x25B6; MSc Cybersecurity &mdash; Coventry University</div>
     <h1>
